@@ -1,0 +1,11 @@
+//- Navbar Mixin 
+mixin navbar(pages, currentPage)
+  nav.navbar   
+    ul     
+      each page, i in pages
+        if(page[1] == currentPage[1])
+          li.selected
+            a(href="#") #{page[0]}
+        else
+          li
+            a(href="#{page[1]}") #{page[0]}

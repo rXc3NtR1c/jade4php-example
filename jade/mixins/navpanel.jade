@@ -1,0 +1,17 @@
+//- NavPanel Mixin 
+mixin navpanel(pages, currentPage)
+  nav.navpanel
+    ol     
+      each page, i in pages
+        if(page[1] == currentPage[1])
+          li.selected
+            a(href="#")
+              span.number
+              span.label #{page[0]}
+            span.arrow
+        else
+          li
+            a(href="#{page[1]}")
+              span.number
+              span.label #{page[0]}
+            span.arrow

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Jade4PHP example - Conditional PHP</title>
+    <meta name="description" content="">
+    <meta name="author" content=""><!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Amazium CSS-->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/amazium.css">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/layout.css">
+  </head>
+  <!-- Favicons-->
+  <link rel="shortcut icon" href="images/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon.png">
+  <body>
+    <header class="row">
+      <div class="grid_6">
+        <h1>jade4php</h1>
+      </div>
+      <div class="grid_6 txt-right">
+        <h3> <a href="#">Download</a></h3><br>
+        <div class="social">fb tw etc</div>
+      </div>
+      <hr>
+    </header>
+    <section class="row"><br>
+      <h2 class="page-title"> Getting started with jade4php</h2><br>
+    </section>
+    <section class="row">
+      <article class="grid_3">
+        <nav class="navpanel">
+          <ol>    
+            <li><a href="index.php"><span class="number"></span><span class="label">introduction</span></a><span class="arrow"></span></li>
+            <li><a href="setup.php"><span class="number"></span><span class="label">Setup</span></a><span class="arrow"></span></li>
+            <li><a href="project.php"><span class="number"></span><span class="label">Project Folders</span></a><span class="arrow"></span></li>
+            <li><a href="paras.php"><span class="number"></span><span class="label">Paragraph Text</span></a><span class="arrow"></span></li>
+            <li><a href="tables.php"><span class="number"></span><span class="label">Tables</span></a><span class="arrow"></span></li>
+            <li><a href="menu.php"><span class="number"></span><span class="label">Menus</span></a><span class="arrow"></span></li>
+            <li class="selected"><a href="#"><span class="number"></span><span class="label">Conditional PHP</span></a><span class="arrow"></span></li>
+            <li><a href="amazium.php"><span class="number"></span><span class="label">Amazium CSS</span></a><span class="arrow"></span></li>
+            <li><a href="forms.php"><span class="number"></span><span class="label">Amazium Forms</span></a><span class="arrow"></span></li>
+          </ol>
+        </nav>
+      </article>
+      <article class="grid_9">
+        <h2>Conditional PHP</h2>
+        <P>Jade4php supports single line filters, so that it is possible to write</P>
+        <pre><code>:PHP if(php expression):
+...do something...
+:PHP else:
+... do something else...
+:php endif;</code></pre>
+        <p><?php if ($isHeads): ?>
+          <h1>Heads</h1><?php else: ?>
+          <h1>Tails</h1><?php endif; ?>
+        </p>
+        <p>
+          <form method="GET" action="/conditional.php">
+            <input type="submit" value="Reload this page and see if you get Heads or Tails">
+          </form>
+        </p>
+        <h3>paras.jade</h3>
+        <pre><code>:php if($isHeads):
+h1 Heads
+:php else:
+h1 Tails
+:php endif;        </code></pre>
+        <h3>paras.php</h3>
+        <pre><code>&lt;?php
+include "lib/Template.class.php";
+$template = new Template();
+$template->assign('isHeads', rand(1,10) > 5 ? true : false);
+$template-&gt;display('templates/conditional.phtml');</code></pre>
+      </article>
+    </section>
+    <footer class="row txt-center">
+      <nav class="navfoot">  
+        <ul>    
+          <li><a href="index.php">introduction</a></li>
+          <li><a href="setup.php">Setup</a></li>
+          <li><a href="project.php">Project Folders</a></li>
+          <li><a href="paras.php">Paragraph Text</a></li>
+          <li><a href="tables.php">Tables</a></li>
+          <li><a href="menu.php">Menus</a></li>
+          <li><a href="amazium.php">Amazium CSS</a></li>
+          <li><a href="forms.php">Amazium Forms</a></li>
+        </ul>
+      </nav>Copyright 2014 <a href="http://www.jade4php.com">www.jade4php.com</a>. All rights reserved.<br>
+    </footer>
+    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="js/amazium.js"></script>
+  </body>
+</html>

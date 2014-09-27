@@ -1,0 +1,125 @@
+extends jade/layout/master.jade
+
+block config
+  - currentPage = setupPage
+  - title = title + ' - Setup'
+
+block content
+    h2 Setup
+    p.
+      To create, run, and debug your Jade4PHP projects you will need the following software:
+    ol
+      li
+        p
+         | Download the 
+         a(href="#") jade4php example website
+         |  and unzip it to our project folder.
+      li
+        p 
+          | Download and install node.js from 
+          a(href="http://nodejs.org/download/" target="_blank") http://nodejs.org/download
+      li
+        p.
+          Open a terminal window and navigate to the folder where you installed the example 
+          website in step (1) and type 
+        pre
+          code.
+            npm install
+        p 
+          | This will install the node.js dependencies defined in package.json for your project so that 
+          | you can run jade using grunt.
+      li
+        p Install grunt-cli using the node package manager npm (already installed with node above)
+        pre
+          code npm install -g grunt-cli
+        p
+          | For further information about grunt and what it can do see 
+          a(href="http://gruntjs.com/" target="_blank") http://gruntjs.com/
+      li
+        p In the terminal window type grunt 
+        pre
+          samp.
+            &gt;grunt
+            Running "clean:compile" (clean) task
+            &gt;&gt; 8 paths cleaned.
+
+            Running "jade4php:compile" (jade4php) task
+            File htdocs/templates/amazium.phtml created.
+            File htdocs/templates/conditional.phtml created.
+            File htdocs/templates/forms.phtml created.
+            File htdocs/templates/intro.phtml created.
+            File htdocs/templates/menu.phtml created.
+            File htdocs/templates/paras.phtml created.
+            File htdocs/templates/setup.phtml created.
+            File htdocs/templates/tables.phtml created.
+
+            Done, without errors.
+        br
+        p Templates in jade4php_example/jade will be compiled as .phtml files to jade4php_example/htdocs/templates.
+        p Have a look at the jade templates and the equivalent .phtml files to see what has been generated.
+      li
+        p
+          | If you do not already have one, you will need a Web Server with support for PHP. 
+        p
+          | If you want to get up and running quickly, you can use the development web server built into PHP.  
+          | Download and install PHP from 
+          a(href="http://www.php.net/downloads.php" target="_blank") http://www.php.net/downloads.php
+        p 
+          | Full instructions for configuration and installation can be found at 
+          a(href="http://php.net/manual/en/install.php" target="_blank") http://php.net/manual/en/install.php
+        p
+          |  You will be using the Command Line PHP so make sure the path to the php executable is in your 
+          | PATH environment if you are using Microsoft Windows.
+          ul.square
+            li
+              p 
+                | Open a second terminal window, navigate to the jade4php projects folder and type...
+                pre
+                  code.
+                    cd htdocs
+                    php -S localhost:8000
+                | This will start a web server on port 8000 with document root your project's htdocs folder.
+            li
+              p
+                | In a browser type
+                pre
+                  code.
+                    localhost:8000/phpinfo.php
+                | This should display information about the installed version of php.  
+                | If you receive an error, go back and check your installation and configuration of PHP.
+            li
+              p
+                | In your browser type
+                pre
+                  code.
+                    localhost:8000/index.php
+                | This will display the home page of the example website..  
+        p
+          | Alternatively, PHP support can be added to a number of web servers (IIS, Xitami, and so on), 
+          | but most commonly Apache HTTP Server is used. Go to  
+          a(href="http://httpd.apache.org/docs/current/install.html" target="_blank") http://httpd.apache.org/docs/current/install.html 
+          | for information on how to install and configure Apache.
+      li
+        p.
+          edit jade4php_example/jade/index.jade to change some text and save the edited file.  
+          In the first terminal window type grunt to update the changed templates.
+        pre
+          samp.
+            &gt;grunt
+            Running "clean:compile" (clean) task
+            &gt;&gt; 8 paths cleaned.
+
+            Running "jade4php:compile" (jade4php) task
+            File htdocs/templates/amazium.phtml created.
+            File htdocs/templates/conditional.phtml created.
+            File htdocs/templates/forms.phtml created.
+            File htdocs/templates/intro.phtml created.
+            File htdocs/templates/menu.phtml created.
+            File htdocs/templates/paras.phtml created.
+            File htdocs/templates/setup.phtml created.
+            File htdocs/templates/tables.phtml created.
+
+            Done, without errors.
+      li
+        p.
+          Refresh your browser to see the changes.              

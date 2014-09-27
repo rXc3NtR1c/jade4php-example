@@ -1,0 +1,17 @@
+{
+  "name": "jade4php-example",
+  "version": "0.0.0",
+  "description": "An example jad4php project",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brian Etherington <brian.etherington@outlook.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-jade4php": "^1.0.0"
+  },
+  "private": true
+}

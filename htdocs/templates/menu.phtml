@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Jade4PHP example - Menus</title>
+    <meta name="description" content="">
+    <meta name="author" content=""><!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Amazium CSS-->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/amazium.css">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/layout.css">
+  </head>
+  <!-- Favicons-->
+  <link rel="shortcut icon" href="images/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon.png">
+  <body>
+    <header class="row">
+      <div class="grid_6">
+        <h1>jade4php</h1>
+      </div>
+      <div class="grid_6 txt-right">
+        <h3> <a href="#">Download</a></h3><br>
+        <div class="social">fb tw etc</div>
+      </div>
+      <hr>
+    </header>
+    <section class="row"><br>
+      <h2 class="page-title"> Getting started with jade4php</h2><br>
+    </section>
+    <section class="row">
+      <article class="grid_3">
+        <nav class="navpanel">
+          <ol>    
+            <li><a href="index.php"><span class="number"></span><span class="label">introduction</span></a><span class="arrow"></span></li>
+            <li><a href="setup.php"><span class="number"></span><span class="label">Setup</span></a><span class="arrow"></span></li>
+            <li><a href="project.php"><span class="number"></span><span class="label">Project Folders</span></a><span class="arrow"></span></li>
+            <li><a href="paras.php"><span class="number"></span><span class="label">Paragraph Text</span></a><span class="arrow"></span></li>
+            <li><a href="tables.php"><span class="number"></span><span class="label">Tables</span></a><span class="arrow"></span></li>
+            <li class="selected"><a href="#"><span class="number"></span><span class="label">Menus</span></a><span class="arrow"></span></li>
+            <li><a href="conditional.php"><span class="number"></span><span class="label">Conditional PHP</span></a><span class="arrow"></span></li>
+            <li><a href="amazium.php"><span class="number"></span><span class="label">Amazium CSS</span></a><span class="arrow"></span></li>
+            <li><a href="forms.php"><span class="number"></span><span class="label">Amazium Forms</span></a><span class="arrow"></span></li>
+          </ol>
+        </nav>
+      </article>
+      <article class="grid_9">
+        <h2>Menus</h2>
+        <p>The Menu panel on this page is defined with the following code snippets....</p>
+        <h3>layout/master.jade</h3>
+        <pre><code>//- Compile-time config variables
+- homePage = ['introduction', 'index.php']
+- setupPage = ['Setup', 'setup.php']
+- paraPage = ['Paragraph Text', 'paras.php']
+- tablesPage = ['Tables', 'tables.php']
+- currentPage = homePage
++navpanel([homePage, setupPage, paraPage, tablesPage], currentPage)</code></pre>
+        <h3>mixins/navpanel.jade</h3>
+        <pre><code>//- NavPanel Mixin 
+mixin navpanel(pages, currentPage)
+  nav.navpanel
+    ol     
+      each page, i in pages
+        if(page[1] == currentPage[1])
+          li.selected
+            a(href="#")
+              span.number
+              span.label &num;{page[0]}
+            span.arrow
+        else
+          li
+            a(href="&num;{page[1]}")
+              span.number
+              span.label &num;{page[0]}
+            span.arrow</code></pre>
+        <h3>layout.css</h3>
+        <pre><code>/**********************************************
+navpanel
+***********************************************/
+.navpanel {
+    float:left;
+    margin-bottom:30px;
+    counter-reset:nav_sections;
+    width: 100%;
+    margin-left:-20px;
+}
+.navpanel ol {
+    list-style:none;
+    border:1px solid #e5e5e5;
+    border-radius:5px;
+    margin:0;
+}
+.navpanel li {    
+    margin-left:0;
+    position:relative;
+    background: inherit;
+    counter-increment:nav_sections;
+    line-height: 1.5;
+}
+.navpanel a {
+    text-decoration:none;
+    background-color:#f7f7f7;
+    border-bottom:1px solid #fff;
+    color:#939ca3;
+    display:block;
+    padding:20px;
+}
+.navpanel li:first-child a {
+    border-top-left-radius:4px;
+    border-top-right-radius:4px;
+}
+.navpanel li:last-child a {
+    border-bottom:none;
+    border-bottom-left-radius:4px;
+    border-bottom-right-radius:4px;
+}
+.navpanel a:hover, .navpanel a:focus {
+    background-color:#edecec;
+    text-decoration:none;
+}
+.navpanel .selected a {
+    border-bottom:1px solid #eee;
+    background-color:#fff;
+    box-shadow:inset 0 2px 2px rgba(0, 0, 0, 0.1);
+    color:#69aa35;
+}
+.navpanel .number::before {
+    content:counter(nav_sections, decimal-leading-zero);
+    color:#bbbfbf;
+    float:left;
+    font-size:1.66667em;
+}
+.navpanel .selected .number::before { 
+    color:#69aa35; 
+}
+.navpanel .label {
+    display:block;
+    margin-left:40px;
+    padding-top:6px;
+}
+.navpanel .arrow {
+    background:transparent url(/img/navpanel_arrow.jpg) 0 0 no-repeat;
+    display:none;
+    height:15px;
+    position:absolute;
+    right:-10px;
+    top:45%;
+    width:11px;
+}
+.navpanel .selected .arrow { display:block; }</code></pre>
+        <h3>menu.jade
+          <pre><code>extends jade/layout/master.jade
+
+block config
+  - currentPage = menuPage</code></pre>
+        </h3>
+        <h3>menu.php
+          <pre><code>&lt;?php
+include "lib/Template.class.php";
+$template = new Template();
+
+$template-&gt;display('templates/menu.phtml');</code></pre>
+        </h3>
+      </article>
+    </section>
+    <footer class="row txt-center">
+      <nav class="navfoot">  
+        <ul>    
+          <li><a href="index.php">introduction</a></li>
+          <li><a href="setup.php">Setup</a></li>
+          <li><a href="project.php">Project Folders</a></li>
+          <li><a href="paras.php">Paragraph Text</a></li>
+          <li><a href="tables.php">Tables</a></li>
+          <li><a href="conditional.php">Conditional PHP</a></li>
+          <li><a href="amazium.php">Amazium CSS</a></li>
+          <li><a href="forms.php">Amazium Forms</a></li>
+        </ul>
+      </nav>Copyright 2014 <a href="http://www.jade4php.com">www.jade4php.com</a>. All rights reserved.<br>
+    </footer>
+    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="js/amazium.js"></script>
+  </body>
+</html>

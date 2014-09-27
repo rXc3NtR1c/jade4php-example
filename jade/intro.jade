@@ -1,0 +1,126 @@
+extends jade/layout/master.jade
+
+block config
+  - currentPage = homePage
+  - title = title + ' - Introduction'
+
+block content
+  //-h2 Introduction
+  figure
+    blockquote
+      p 
+        | I don't want to sound like a badass but... 
+        br
+        | I eject my usb without removing it safely..!
+    figcaption William Shakespeare
+  h2 Jade4php ...
+  ul.indent
+    li Is a Jade extension to create beautiful php html templates.
+    li Fully supports all standard jade syntax including compile time variables and conditional code.
+    li Adds support for single line of text in filters where a text block does not follow the filter.
+  pre
+    code.
+      e.g. :php if ($test == 1):
+      
+      as well as blocks of text:
+      
+          :php
+            $var1 = 'foo';
+            $var1 = 'bar';
+  p. 
+    Jade4php adds a simple php function to return a formatted php string allowing it to be stored in a run 
+    time javascript variable.
+  pre
+    code.
+      e.g. - test = php('$foo');
+      
+      will asign to variable test:
+      
+      &lt;?php echo htmlspecialchars($foo, ENT_QUOTES, 'UTF-8'); ?&gt;   
+  p.
+    Note: the formatted strings must be displayed Unescaped because the formatting includes &lt;php and ?&gt; characters.  
+    Don't worry, the expression argument to the php function call is fully escaped at runtime. 
+
+  p However, note that it is possible to set a no_escape flag:
+  pre
+    code.
+      - test = php('$foo', true);
+      
+      will asign to variable test:
+      
+      &lt;?php echo $foo; ?&gt;
+  p ## Usage
+  pre
+    code.
+      var jade = require('jade');
+      var jade4php = require('jade4php');
+      
+      jade4php(jade);
+      
+      var html = jade.render('string of jade');
+  p ## Example
+  pre
+    code.
+      doctype html
+      //- normal jade variable
+      - title = 'Example & Test';
+      //- php function call to format an escaped 
+      //- echo statement of expression argument
+      - test = php('$test_var + 1');
+      //- php function call to format an echo 
+      //- statement of expression argument without escape prcessing
+      - bad = php('$foo', true);
+      html
+        head
+          // normal jade interpolation
+          title #{title}
+        body
+          // php filter
+          :php if ($test == 1):
+          p PHP variable $test has value of 1
+          :php else:
+          p PHP variable $test has some other value
+          :php endif;
+          p
+            :php(echo) 'SINGLE LINE <echo&gt; with escape'
+          // normal jade interpolation
+          p.
+            This way is shortest if you need big &excl;{test}
+            blocks of text spanning multiple
+            lines.
+          // note that these interpolations of PHP strings must not be escaped
+          p!= test
+          p!= bad
+          // what happens when the PHP string is escaped
+          p= test
+  p Will produce:
+  pre
+    samp.
+      &lt;!DOCTYPE html&gt;
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;!-- normal jade interpolation--&gt;
+          &lt;title&gt;Example &amp; Test&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;!-- php filter--&gt;
+          &lt;?php if ($test == 1): ?&gt;
+          &lt;p&gt;PHP variable $test has value of 1&lt;/p&gt;
+          &lt;?php else: ?&gt;
+          &lt;p&gt;PHP variable $test has some other value&lt;/p&gt;
+          &lt;?php endif; ?&gt;
+          &lt;p&gt;&lt;?php echo htmlspecialchars('SINGLE LINE &lt;echo&gt; with escape', ENT_QUOTES, 'UTF-8'); ?&gt;
+          &lt;/p&gt;
+          &lt;!-- normal jade interpolation--&gt;
+          &lt;p&gt;
+            This way is shortest if you need big &lt;?php echo htmlspecialchars($test_var + 1, ENT_QUOTES, 'UTF-8'); ?&gt;
+            blocks of text spanning multiple
+            lines.
+          &lt;/p&gt;
+          &lt;!-- note that these interpolations of PHP strings must not be escaped--&gt;
+          &lt;p&gt;&lt;?php echo htmlspecialchars($test_var + 1, ENT_QUOTES, 'UTF-8'); ?&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;?php echo $foo; ?&gt;&lt;/p&gt;
+          &lt;!-- what happens when the PHP string is escaped--&gt;
+          &lt;p&gt;&lt;?php echo htmlspecialchars($test_var + 1, ENT_QUOTES, 'UTF-8'); ?&gt;&lt;/p&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
