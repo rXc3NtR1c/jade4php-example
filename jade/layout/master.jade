@@ -28,31 +28,37 @@ html(lang="en")
     //- Mobile Specific Metas
     meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
 
-    // Amazium CSS
+    //- font-awesome
+    link(href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css", rel="stylesheet")
+
+    //- Google fonts
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css')
+
+    //- Amazium CSS
     link(rel="stylesheet" href="css/base.css")
     link(rel="stylesheet" href="css/amazium.css")
     link(rel="stylesheet" href="css/form.css")
     link(rel="stylesheet" href="css/layout.css")
 
-  // Favicons
-  link(rel="shortcut icon" href="images/favicon.ico")
-  link(rel="apple-touch-icon-precomposed" href="img/apple-touch-icon.png")
+    //- Favicons
+    link(rel="shortcut icon" href="images/favicon.ico")
+    link(rel="apple-touch-icon-precomposed" href="img/apple-touch-icon.png")
 
   body
     header.row
       div.grid_6
-        h1 jade4php
+        image(src="img/logo.png")
       div.grid_6.txt-right
         h3 
-          a(href="#")
-            | Download
+          a(href="https://github.com/BookArt/jade4php-example/archive/master.zip") download&nbsp;
+            span.fa.fa-download
         br
-        div.social
-          | fb tw etc
+        div.social &nbsp
+          //- fb tw etc
       hr
     section.row
       br
-      h2.page-title  Getting started with jade4php
+      h2.page-title Getting started with jade4php
       br
     section.row
       article.grid_3

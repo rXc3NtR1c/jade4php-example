@@ -8,28 +8,29 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <!-- Amazium CSS-->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/amazium.css">
     <link rel="stylesheet" href="css/form.css">
     <link rel="stylesheet" href="css/layout.css">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon.png">
   </head>
-  <!-- Favicons-->
-  <link rel="shortcut icon" href="images/favicon.ico">
-  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon.png">
   <body>
     <header class="row">
       <div class="grid_6">
-        <h1>jade4php</h1>
+        <image src="img/logo.png"></image>
       </div>
       <div class="grid_6 txt-right">
-        <h3> <a href="#">Download</a></h3><br>
-        <div class="social">fb tw etc</div>
+        <h3> <a href="https://github.com/BookArt/jade4php-example/archive/master.zip">download&nbsp;<span class="fa fa-download"></span></a></h3><br>
+        <div class="social">&nbsp
+        </div>
       </div>
       <hr>
     </header>
     <section class="row"><br>
-      <h2 class="page-title"> Getting started with jade4php</h2><br>
+      <h2 class="page-title">Getting started with jade4php</h2><br>
     </section>
     <section class="row">
       <article class="grid_3">
@@ -49,7 +50,33 @@
       </article>
       <article class="grid_9">
         <h2>Project Folders</h2>
-        <p>The example project is organuised as follows:</p>
+        <p>The example project is organised as follows:</p>
+        <ol class="treelist">
+          <li class="folder">Your project folder
+            <ol class="treelist">
+              <li class="folder">htdocs<br><span>This is the web root folder for your project.</span>
+                <ol class="treelist">
+                  <li class="folder">css<br><span>This folder contains all of the stylesheets for the project.</span></li>
+                  <li class="folder">img<br><span>This folder contains all of the images for the project.        </span></li>
+                  <li class="folder">js<br><span>This folder contains all of the javascript file for the project.        </span></li>
+                  <li class="folder">lib<br><span>This folder contains PHP classes used in the project.        </span></li>
+                  <li class="folder">templates<br><span>This folder contains the generated  .phtml template files used in the project.       </span></li>
+                  <li class="file">PHP Source Files</li>
+                </ol>
+              </li>
+              <li class="folder">jade
+                <ol class="treelist">
+                  <li class="folder">layout<br><span>This folder contains the jade master layout templates.        </span></li>
+                  <li class="folder">mixins<br><span>This folder contains the jade mixins used in the project (e.g. menus)        </span></li>
+                  <li class="file">Jade Templates</li>
+                </ol>
+              </li>
+              <li class="folder">node_modules<br><span>This folder contains the node.js modules required by your project.   </span></li>
+              <li class="file">Gruntfile.js<br><span>This is the grunt task file to perform the taks you will need in your development workflow (e.g. compile the jade templates)   </span></li>
+              <li class="file">package.json<br><span>This file contains the definition of the node.js dependencies for the node package manager (npm)     </span></li>
+            </ol>
+          </li>
+        </ol>
       </article>
     </section>
     <footer class="row txt-center">

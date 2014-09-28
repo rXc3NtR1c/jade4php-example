@@ -8,4 +8,46 @@ block content
   h2 Project Folders
   p.
     The example project is organised as follows:
-  //-image(src="")
+  ol.treelist
+    li.folder Your project folder
+      ol.treelist
+        li.folder htdocs
+          br
+          span This is the web root folder for your project.
+          ol.treelist
+            li.folder css
+              br
+              span This folder contains all of the stylesheets for the project.
+            li.folder img
+              br
+              span This folder contains all of the images for the project.        
+            li.folder js
+              br
+              span This folder contains all of the javascript file for the project.        
+            li.folder lib
+              br
+              span This folder contains PHP classes used in the project.        
+            li.folder templates
+              br
+              span This folder contains the generated  .phtml template files used in the project.       
+            li.file PHP Source Files
+        li.folder jade
+          ol.treelist
+            li.folder layout
+              br
+              span This folder contains the jade master layout templates.        
+            li.folder mixins
+              br
+              span This folder contains the jade mixins used in the project (e.g. menus)        
+            li.file Jade Templates
+        li.folder node_modules
+              br
+              span This folder contains the node.js modules required by your project.   
+        li.file Gruntfile.js
+              br
+              span This is the grunt task file to perform the taks you will need in your development workflow (e.g. compile the jade templates)   
+        li.file package.json
+              br
+              span This file contains the definition of the node.js dependencies for the node package manager (npm)     
+
+

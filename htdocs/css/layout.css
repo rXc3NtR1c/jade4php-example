@@ -1,17 +1,32 @@
 /***********************************************
 Example use only - Delete when done..!
 ***********************************************/
-body                                            { margin:20px 0; color: #747778; }                                                
+body                                            { margin:20px 0; color: #747778; font-family: 'Open Sans', sans-serif;}                                                
 h1,h2,h3,h4,h5,h6                               { color: #747778; }
 a                                               { color: #747778; text-decoration:none; font-weight:bold;}
 a:hover                                         { text-decoration:underline; }
 pre code                                        { color: #747778; background-color:#eee; border:1px solid #eee; }
 footer                                          { font-size: 12px; }
+blockquote                                      { border-left:none; text-align: center; }
+blockquote p                                    { font-size: 1.8em; font-weight: 300; line-height: 150%;}
+figcaption                                      { font-size: 1.2em; float: right; margin: 20px 200px 0 0;}
 .indent                                         { margin-left: 20px; }
-.page-title                                     { color: #404040; }
+.page-title                                     { color: #747778; }
 .grid-highlight                                 { margin-bottom:5px; }
 .grid-highlight [class^="grid_"]                { line-height:30px; text-align:center; background-color:#F1F1F1; }
 
+/**********************************************
+treelist
+***********************************************/
+.treelist { list-style: none; }
+.treelist li::before {
+    font-family: FontAwesome;
+    margin-left: -1.1em;
+    display: inline-block;
+    width: 1.1em; 
+}
+.folder::before { content: '\f07b'; } /* icon-folder-close */
+.file::before { content: '\f016'; } /* icon-file */
 /**********************************************
 navbar
 ***********************************************/

@@ -2,12 +2,29 @@
   "name": "jade4php-example",
   "version": "0.0.0",
   "description": "An example jade4php project",
+  "homepage": "http://www.jade4php.com",
   "main": "Gruntfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Brian Etherington <brian.etherington@outlook.com>",
-  "license": "MIT",
+  "author": {
+    "name": "Brian Etherington",
+    "email": "brian.etherington@outlook.com",
+    "url": "http://www.jade4php.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/BookArt/jade4php-example.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BookArt/jade4php-example/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/BookArt/jade4php-example/blob/master/LICENSE-MIT"
+    }
+  ],
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
