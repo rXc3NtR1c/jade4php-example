@@ -1,7 +1,7 @@
 include ../mixins/navpanel.jade
 include ../mixins/navfoot.jade
 //- Compile-time config variables
-- homePage = ['introduction', 'index.php']
+- homePage = ['Introduction', 'index.php']
 - setupPage = ['Setup', 'setup.php']
 - paraPage = ['Paragraph Text', 'paras.php']
 - tablesPage = ['Tables', 'tables.php']
@@ -11,19 +11,20 @@ include ../mixins/navfoot.jade
 - amaziumPage = ['Amazium CSS', 'amazium.php']
 - projectPage = ['Project Folders', 'project.php']
 - currentPage = homePage
-- title = 'Jade4PHP example'
+- title = 'Jade4PHP'
 //- Read config variables from page extension
 block config
 doctype html
 html(lang="en")
   head
-    meta(charset="utf-8")
-    title #{title}
-    meta(name="description" content="")
-    meta(name="author" content="")
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <![endif]--> 
+    
+    meta(charset="utf-8")
+    title #{title}
+    meta(name="description" content="Jade4PHP is a an extension for Jade.js allowing you to create beautiful jade templates for PHP")
+    meta(name="author" content="Brian Etherington")
 
     //- Mobile Specific Metas
     meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
@@ -41,28 +42,50 @@ html(lang="en")
     link(rel="stylesheet" href="css/layout.css")
 
     //- Favicons
-    link(rel="shortcut icon" href="images/favicon.ico")
-    link(rel="apple-touch-icon-precomposed" href="img/apple-touch-icon.png")
+    link(rel="shortcut icon" href="img/favicon.ico")
+    link(rel="apple-touch-icon-precomposed" href="img/apple-touch-icon.png") 
 
   body
     header.row
       div.grid_6
-        a(href="https://github.com/BookArt/jade4php" target="_blank")
-          image(src="img/logo.png")
+        span
+          a.show-screen(href="https://github.com/BookArt/jade4php" target="_blank")
+            image(src="img/logo.png")
+        span
+          a.show-tablet(href="https://github.com/BookArt/jade4php" target="_blank")
+            image(src="img/logo.png")
+        span
+          a.show-mobile.float-left(href="https://github.com/BookArt/jade4php" target="_blank")
+            image(src="img/logo.png" width="200px")
+        span
+          a.show-mobile#navigation-btn(href="#") 
+            span.fa.fa-bars.fa-2x
       div.grid_6.txt-right
-        h3 
+        h3.download
           a(href="https://github.com/BookArt/jade4php-example/archive/master.zip") download&nbsp;
             span.fa.fa-download
-        br
-        div.social &nbsp
-          //- fb tw etc
+        div.social
+          // AddToAny BEGIN
+          div.a2a_kit.a2a_kit_size_32.a2a_default_style
+            a.a2a_button_facebook
+            a.a2a_button_twitter
+            a.a2a_button_google_plus
+            a.a2a_button_tumblr
+            //-a.a2a_button_stumbleupon
+            //-a.a2a_dd( href='https://www.addtoany.com/share_save?linkurl=http%3A%2F%2Fwww.jade4php.com&amp;linkname=')              
+          script(type='text/javascript').
+            var a2a_config = a2a_config || {};
+            a2a_config.linkname = "jade4php";
+            a2a_config.linkurl = "http://www.jade4php.com";
+          script(type='text/javascript' src='//static.addtoany.com/menu/page.js')
+          // AddToAny END         
       hr
     section.row
       br
-      h2.page-title Getting started with jade4php
+      h2.indent Getting started with jade4php
       br
     section.row
-      article.grid_3
+      article.grid_3#navigation
         +navpanel([homePage, setupPage, projectPage, paraPage, tablesPage, menuPage, conditionalPage, amaziumPage, formsPage], currentPage)
       article.grid_9
         block content
@@ -75,3 +98,34 @@ html(lang="en")
     //- Scripts
     script(type="text/javascript" src="js/jquery-1.8.0.min.js")
     script(type="text/javascript" src="js/amazium.js")
+    script(type="text/javascript").
+      function toggleNavigationClass() {
+        if ( document.getElementById('navigation').className.match(/(?:^|\s)showme(?!\S)/) ) {
+          document.getElementById('navigation').className =
+              document.getElementById('navigation').className.replace( /(?:^|\s)showme(?!\S)/g , '' );
+        } else {
+          document.getElementById("navigation").className += " showme";
+        }
+      }
+      window.onload = function() {
+        var navigationBtnId = document.getElementById('navigation-btn');
+        if (navigationBtnId != null) {
+          navigationBtnId.addEventListener( 'click' , toggleNavigationClass );
+        }
+      }
+    //- jquery solution:
+    //- $( document ).ready(function() {
+    //-    $('#navigation-btn').click(function(event) { $('#navigation').toggleClass('showme'); event.preventDefault(); });
+    //-  }); 
+    //-
+    //- http://stackoverflow.com/questions/195951/change-an-elements-css-class-with-javascript
+    //-
+    //- Regex expression in toggleClass:
+    //-
+    //- (?:^|\s) # match the start of the string, or any single whitespace character
+    //-
+    //- MyClass  # the literal text for the classname to remove
+    //- 
+    //- (?!\S)   # negative lookahead to verify the above is the whole classname
+    //-          # ensures there is no non-space character following
+    //-          # (i.e. must be end of string or a space

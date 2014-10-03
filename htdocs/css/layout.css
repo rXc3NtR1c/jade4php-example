@@ -1,6 +1,7 @@
 /***********************************************
-Example use only - Delete when done..!
+Screen 1200px+
 ***********************************************/
+
 body                                            { margin:20px 0; color: #747778; font-family: 'Open Sans', sans-serif;}                                                
 h1,h2,h3,h4,h5,h6                               { color: #747778; }
 a                                               { color: #747778; text-decoration:none; font-weight:bold;}
@@ -8,12 +9,18 @@ a:hover                                         { text-decoration:underline; }
 pre code                                        { color: #747778; background-color:#eee; border:1px solid #eee; }
 footer                                          { font-size: 12px; }
 blockquote                                      { border-left:none; text-align: center; }
-blockquote p                                    { font-size: 1.8em; font-weight: 300; line-height: 150%;}
-figcaption                                      { font-size: 1.2em; float: right; margin: 20px 200px 0 0;}
+blockquote p                                    { font-size: 28px; font-weight: 300; line-height: 150%;  color: #008001; }
+figcaption                                      { font-size: 19px; float: right; margin: 20px 200px 0 0;}
+pre code                                        { overflow: auto; }
+pre p                                           { margin:0; padding:10px 0; line-height:20px; overflow: auto;}
 .indent                                         { margin-left: 20px; }
-.page-title                                     { color: #747778; }
 .grid-highlight                                 { margin-bottom:5px; }
 .grid-highlight [class^="grid_"]                { line-height:30px; text-align:center; background-color:#F1F1F1; }
+.download                                       { float: right; margin: 10px 0; clear: right;}
+.social                                         { float: right; margin: 20px -10px 20px 0; clear: right;}
+
+#navigation-btn { float: right; margin: 2px 10px;}
+#navigation { display:block; }
 
 /**********************************************
 treelist
@@ -21,10 +28,11 @@ treelist
 .treelist { list-style: none; }
 .treelist li::before {
     font-family: FontAwesome;
-    margin-left: -1.1em;
+    margin-left: -17px;
     display: inline-block;
-    width: 1.1em; 
+    width: 25px; 
 }
+.treelist p { margin: 0 0 0 8px; line-height: 18px;}
 .folder::before { content: '\f07b'; } /* icon-folder-close */
 .file::before { content: '\f016'; } /* icon-file */
 /**********************************************
@@ -78,16 +86,16 @@ navpanel
     float:left;
     margin-bottom:30px;
     counter-reset:nav_sections;
-    margin-left:-20px;
-    font-family: Verdana, sans-serif;
-    font-size: 16px;    
+    font-size: 19px; 
+    font-weight: 300;
+    width: 100%; 
 }
 
 .navpanel ol {
     list-style:none;
     border:1px solid #e5e5e5;
     border-radius:5px;
-    margin:0;
+    margin:0 10px 0 0;
     background-color:#f7f7f7;
 }
 
@@ -104,8 +112,7 @@ navpanel
     border-bottom:1px solid #fff;
     color:#939ca3;
     display:block;
-    padding:20px;
-    font-weight: 100;  
+    padding:20px; 
 }
 
 .navpanel li:first-child a {
@@ -128,18 +135,18 @@ navpanel
     border-bottom:1px solid #eee;
     background-color:#fff;
     box-shadow:inset 0 2px 2px rgba(0, 0, 0, 0.1);
-    color:#69aa35;
+    color: #008001; 
 }
 
 .navpanel .number::before {
     content:counter(nav_sections, decimal-leading-zero);
     color:#bbbfbf;
     float:left;
-    font-size:20px;
+    font-size:22px;
 }
 
 .navpanel .selected .number::before { 
-    color:#69aa35; 
+    color: #008001; 
 }
 
 .navpanel .label {
@@ -189,7 +196,7 @@ navfoot
     text-transform: uppercase;
     padding:5px 0;
     background:#fff;
-    color:#20c05c;
+    color: #008001;
     float:left;
 }
 
@@ -200,29 +207,18 @@ navfoot
 .navfoot  li:after { 
     position: absolute; 
     content: ".";     
-    top: -0.2em;
+    top: -10px;
     right: -17px;
     font-size: 46px;
-    color:#20c05c;
+    color: #008001;
 }
 
 .navfoot  li:last-child:after { content: "";}
 
 /***********************************************
-Screen 1200px+
-***********************************************/
-.example                                        {  }
-
-
-
-/***********************************************
 Screen Smaller than 1199px
 ***********************************************/
 @media only screen and (min-width:960px) and (max-width: 1199px) {
-
-.example                                        {  }
-
-
 
 }
 
@@ -230,31 +226,30 @@ Screen Smaller than 1199px
 Tablet (Smaller than 959px)
 ***********************************************/
 @media only screen and (min-width:768px) and (max-width: 959px) {
+    .navpanel {
+        margin-bottom:10px;
+        font-size: 16px; 
+    }
+    .navpanel ol {
+        margin:0;
 
-.example                                        {  }
-
-
-
+    }
+    .navpanel a {
+        padding:10px; 
+    }
 }
 
 /***********************************************
 Mobile (portrait 300px)
 ***********************************************/
 @media only screen and (max-width:767px) {
-
-.example                                        {  }
-
-
-
+    #navigation { display:none; }
+    #navigation.showme { display:block; }
 }
 
 /***********************************************
 Mobile (landscape 420px)
 ***********************************************/
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-
-.example                                        {  }
-
-
 
 }

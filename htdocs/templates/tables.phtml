@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>Jade4PHP example - Tables</title>
-    <meta name="description" content="">
-    <meta name="author" content=""><!--[if lt IE 9]>
+    <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <![endif]--> 
+    <meta charset="utf-8">
+    <title>Jade4PHP - Tables</title>
+    <meta name="description" content="Jade4PHP is a an extension for Jade.js allowing you to create beautiful jade templates for PHP">
+    <meta name="author" content="Brian Etherington">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400" rel="stylesheet" type="text/css">
@@ -14,28 +15,40 @@
     <link rel="stylesheet" href="css/amazium.css">
     <link rel="stylesheet" href="css/form.css">
     <link rel="stylesheet" href="css/layout.css">
-    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="img/favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon.png">
   </head>
   <body>
     <header class="row">
-      <div class="grid_6"><a href="https://github.com/BookArt/jade4php" target="_blank">
-          <image src="img/logo.png"></image></a></div>
+      <div class="grid_6"><span><a href="https://github.com/BookArt/jade4php" target="_blank" class="show-screen">
+            <image src="img/logo.png"></image></a></span><span><a href="https://github.com/BookArt/jade4php" target="_blank" class="show-tablet">
+            <image src="img/logo.png"></image></a></span><span><a href="https://github.com/BookArt/jade4php" target="_blank" class="show-mobile float-left">
+            <image src="img/logo.png" width="200px"></image></a></span><span><a id="navigation-btn" href="#" class="show-mobile"> <span class="fa fa-bars fa-2x"></span></a></span></div>
       <div class="grid_6 txt-right">
-        <h3> <a href="https://github.com/BookArt/jade4php-example/archive/master.zip">download&nbsp;<span class="fa fa-download"></span></a></h3><br>
-        <div class="social">&nbsp
+        <h3 class="download"><a href="https://github.com/BookArt/jade4php-example/archive/master.zip">download&nbsp;<span class="fa fa-download"></span></a></h3>
+        <div class="social">
+          <!-- AddToAny BEGIN-->
+          <div class="a2a_kit a2a_kit_size_32 a2a_default_style"><a class="a2a_button_facebook"></a><a class="a2a_button_twitter"></a><a class="a2a_button_google_plus"></a><a class="a2a_button_tumblr"></a>
+          </div>
+          <script type="text/javascript">
+            var a2a_config = a2a_config || {};
+            a2a_config.linkname = "jade4php";
+            a2a_config.linkurl = "http://www.jade4php.com";
+          </script>
+          <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+          <!-- AddToAny END         -->
         </div>
       </div>
       <hr>
     </header>
     <section class="row"><br>
-      <h2 class="page-title">Getting started with jade4php</h2><br>
+      <h2 class="indent">Getting started with jade4php</h2><br>
     </section>
     <section class="row">
-      <article class="grid_3">
+      <article id="navigation" class="grid_3">
         <nav class="navpanel">
           <ol>    
-            <li><a href="index.php"><span class="number"></span><span class="label">introduction</span></a><span class="arrow"></span></li>
+            <li><a href="index.php"><span class="number"></span><span class="label">Introduction</span></a><span class="arrow"></span></li>
             <li><a href="setup.php"><span class="number"></span><span class="label">Setup</span></a><span class="arrow"></span></li>
             <li><a href="project.php"><span class="number"></span><span class="label">Project Folders</span></a><span class="arrow"></span></li>
             <li><a href="paras.php"><span class="number"></span><span class="label">Paragraph Text</span></a><span class="arrow"></span></li>
@@ -132,7 +145,7 @@ $template-&gt;display('templates/tables.phtml');</code></pre>
     <footer class="row txt-center">
       <nav class="navfoot">  
         <ul>    
-          <li><a href="index.php">introduction</a></li>
+          <li><a href="index.php">Introduction</a></li>
           <li><a href="setup.php">Setup</a></li>
           <li><a href="project.php">Project Folders</a></li>
           <li><a href="paras.php">Paragraph Text</a></li>
@@ -145,5 +158,21 @@ $template-&gt;display('templates/tables.phtml');</code></pre>
     </footer>
     <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="js/amazium.js"></script>
+    <script type="text/javascript">
+      function toggleNavigationClass() {
+        if ( document.getElementById('navigation').className.match(/(?:^|\s)showme(?!\S)/) ) {
+          document.getElementById('navigation').className =
+              document.getElementById('navigation').className.replace( /(?:^|\s)showme(?!\S)/g , '' );
+        } else {
+          document.getElementById("navigation").className += " showme";
+        }
+      }
+      window.onload = function() {
+        var navigationBtnId = document.getElementById('navigation-btn');
+        if (navigationBtnId != null) {
+          navigationBtnId.addEventListener( 'click' , toggleNavigationClass );
+        }
+      }
+    </script>
   </body>
 </html>
