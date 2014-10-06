@@ -1,0 +1,34 @@
+//- Scripts 
+script(type="text/javascript" src="js/jquery-1.8.0.min.js")
+script(type="text/javascript" src="js/amazium.js")
+script(type="text/javascript").
+  function toggleNavigationClass() {
+    if ( document.getElementById('navigation').className.match(/(?:^|\s)showme(?!\S)/) ) {
+      document.getElementById('navigation').className =
+          document.getElementById('navigation').className.replace( /(?:^|\s)showme(?!\S)/g , '' );
+    } else {
+      document.getElementById("navigation").className += " showme";
+    }
+  }
+  window.onload = function() {
+    var navigationBtnId = document.getElementById('navigation-btn');
+    if (navigationBtnId != null) {
+      navigationBtnId.addEventListener( 'click' , toggleNavigationClass );
+    }
+  }
+//- jquery solution:
+//- $( document ).ready(function() {
+//-    $('#navigation-btn').click(function(event) { $('#navigation').toggleClass('showme'); event.preventDefault(); });
+//-  }); 
+//-
+//- http://stackoverflow.com/questions/195951/change-an-elements-css-class-with-javascript
+//-
+//- Regex expression in toggleClass:
+//-
+//- (?:^|\s) # match the start of the string, or any single whitespace character
+//-
+//- MyClass  # the literal text for the classname to remove
+//- 
+//- (?!\S)   # negative lookahead to verify the above is the whole classname
+//-          # ensures there is no non-space character following
+//-          # (i.e. must be end of string or a space

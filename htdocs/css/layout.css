@@ -4,6 +4,7 @@ Screen 1200px+
 
 body                                            { margin:20px 0; color: #747778; font-family: 'Open Sans', sans-serif;}                                                
 h1,h2,h3,h4,h5,h6                               { color: #747778; }
+i                                               { font-style:italic; }
 a                                               { color: #747778; text-decoration:none; font-weight:bold;}
 a:hover                                         { text-decoration:underline; }
 pre code                                        { color: #747778; background-color:#eee; border:1px solid #eee; }
@@ -13,6 +14,8 @@ blockquote p                                    { font-size: 28px; font-weight: 
 figcaption                                      { font-size: 19px; float: right; margin: 20px 200px 0 0;}
 pre code                                        { overflow: auto; }
 pre p                                           { margin:0; padding:10px 0; line-height:20px; overflow: auto;}
+tbody.striped tr:nth-child(even)                { background-color:#FFF; }
+tbody.striped tr:nth-child(odd)                 { background-color:#F1F1F1; }
 .indent                                         { margin-left: 20px; }
 .grid-highlight                                 { margin-bottom:5px; }
 .grid-highlight [class^="grid_"]                { line-height:30px; text-align:center; background-color:#F1F1F1; }

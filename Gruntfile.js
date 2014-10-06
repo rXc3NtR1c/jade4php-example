@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         },
         expand: true,
         cwd: 'jade',
-        src: ['**/*.jade', '!_**/*.jade', '!layout/*.jade', '!mixins/*.jade'],
+        src: ['**/*.jade', '!_**/*.jade', '!layout/*.jade', '!mixins/*.jade', '!includes/*.jade'],
         dest: 'htdocs/templates/',
         ext: '.phtml'
       }
