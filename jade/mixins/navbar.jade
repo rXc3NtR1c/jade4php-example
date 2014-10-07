@@ -1,6 +1,6 @@
 //- Navbar Mixin 
 mixin navbar(pages, currentPage)
-  nav.navbar   
+  nav(class!=(attributes.class || 'navbar'))
     ul     
       each page, i in pages
         if(page[1] == currentPage[1])

@@ -1,6 +1,6 @@
 //- NavPanel Mixin 
 mixin navpanel(pages, currentPage)
-  nav.navpanel
+  nav(class!=(attributes.class || 'navpanel'))
     ol     
       each page, i in pages
         if(page[1] == currentPage[1])

@@ -1,6 +1,6 @@
 //- Navfoot Mixin 
 mixin navfoot(pages, currentPage) 
-  nav.navfoot   
+  nav(class!=(attributes.class || 'navfoot'))   
     ul     
       each page, i in pages
         if(page[1] != currentPage[1])
