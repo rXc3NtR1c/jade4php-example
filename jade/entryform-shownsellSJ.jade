@@ -1,0 +1,210 @@
+extends jade/layout/master.jade
+
+block config
+  - currentPage = sellPage
+  - title = title + ' - ' + currentPage[0]
+
+block php-config
+    :php
+        include('../../incs/php/connect.php');
+        include('../../incs/php/config.php');
+        require('../../incs/php/class.SellEntrySJ.php');
+        
+        if ($_POST['submit_form']=='true') {
+            $entry = new SellEntry($_POST, $_SERVER);
+            $success = $entry->Save();
+            if ($success) {
+                $entry->EmailSCG(EMAIL_SELL);
+            }
+        }
+
+
+block local-styles
+    style.
+        .style2 {font-size: 18px}
+        .style4 {font-style: italic}
+        .style5 {color: #ff9933; font-weight: bold;}
+        .style6 {color: #ff9933}
+        .style3 {color: #99ff33}
+  
+block local-scripts
+    script(type="text/javascript").
+        function roundNumber(rnum, rlength) { // Arguments: number to round, number of decimal places
+            var newnumber = Math.round(rnum*Math.pow(10,rlength))/Math.pow(10,rlength);
+            document.roundform.numberfield.value = newnumber; // Output the result to the form field (change for your purposes)
+        }
+                
+        var checker;
+        checker = 'SJ Option 1 - Show-N-Sell Entry';
+        function performChecks(theRadio)
+        {
+            checker = theRadio.value;
+            changeForPasses();
+            return false;
+        }
+        
+        function changeForPasses(){
+            var price = 0.00;
+            if (checker == 'SJ Option 1 - Show-N-Sell Entry') {
+                price = 36.05;
+            }
+            price = price.toFixed(2);
+            document.form.total.value = price;
+            document.form.totaldisplay.value = price;
+        }
+        
+        function handleEnter (field, event) {
+            var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+            if (keyCode == 13) {
+                var i;
+                for (i = 0; i < field.form.elements.length; i++) {
+                    if (field == field.form.elements[i]) {
+                        break;
+                    }
+                    i = (i + 1) % field.form.elements.length;
+                    field.form.elements[i].focus();
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        }
+                
+        // form validation function //
+        function validate(form) {
+            var firstname = form.firstname.value;
+            if(firstname == "") { inlineMsg('firstname','Please fill out this field.',2); return false; }
+            
+            var lastname = form.lastname.value;
+            if(lastname == "") { inlineMsg('lastname','Please fill out this field.',2); return false; }
+            
+            var address = form.address.value;
+            if(address == "") { inlineMsg('address','Please fill out this field.',2); return false; }
+            
+            var suburb = form.suburb.value;
+            if(suburb == "") { inlineMsg('suburb','Please fill out this field.',2); return false; }
+            
+            var state = form.state.value;
+            if(state == "0") { inlineMsg('state','Please fill out this field.',2); return false; }
+            
+            var postcode = form.postcode.value;
+            if(postcode == "") { inlineMsg('postcode','Please fill out this field.',2); return false; }
+            
+            var phone = form.phoneMobile.value;
+            if(phone == "") { inlineMsg('phoneMobile','Please fill out this field.',2); return false; }
+            
+            var email = form.email.value;
+            if(email == "") { inlineMsg('email','Please fill out this field.',2); return false; }
+
+            var make = form.make.value;
+            if(make == "") { inlineMsg('make','Please fill out this field.',2); return false; }
+            
+            var model = form.model.value;
+            if(model == "") { inlineMsg('model','Please fill out this field.',2); return false; }
+            
+            var year = form.year.value;
+            if(year == "") { inlineMsg('year','Please fill out this field.',2); return false; }
+            
+            var colour = form.colour.value;
+            if(colour == "") { inlineMsg('colour','Please fill out this field.',2); return false; }
+            
+            var comments = form.comments.value;
+            if(comments == "") { inlineMsg('comments','Please fill out this field.',2); return false; }
+
+            if(!form.acceptance.checked) { inlineMsg('acceptance','You must accept the Terms & Conditions.',2); return false; }
+            
+            return true;
+        }
+
+block content
+    table.content-table(width="864", border="0", cellspacing="0", cellpadding="0")
+        tr
+            td.breadcrumbs-area
+                div(style="text-align: left")
+                    a(href="/") Home 
+                    |  » Sydney Jamboree  - Online Entry - Show N Sell
+                    
+        tr
+            td.content-bg(height="450", align="center", valign="top")
+                table(width="100%", border="0", cellspacing="0", cellpadding="0")
+                    tr
+                        td.content(width='686', height='250', valign='top')
+                            h1.style2(align='left') SYDNEY JAMBOREE  ONLINE ENTRY  - SHOW N SELL
+                            :php
+                                if ($_POST['submit_form']=='true') {
+                            table(width='100%', border='0', cellspacing='0', cellpadding='0')
+                                tr
+                                    td(align='left')
+                                        :php
+                                            echo $entry->mailbody;
+                            :php
+                                print $entry->PayPal(false);
+                                } else {
+                            //- Start form
+                            form#form.form(name='form', action='', onsubmit='return validate(this)', method='post')
+                                - invoice = 'jam_' + php("date('dmYhis')", true)
+                                input(name='submit_form', type='hidden', value='true')
+                                input(name='invoice', type='hidden', value!='#{invoice}')
+                                table.forms(border='0', cellspacing='0', cellpadding='2', width='100%')
+                                    +row-section-head('NOTE: This is intended for extensively modified street cars or Sport Compact drag cars. We will be assessing each entry on a case by case basis, more details will be emailed to you on completion of your entry.')
+                                    +row-section-head('Entrant Details')
+                                    +row-text('firstname', 'First Name', 40)
+                                    +row-text('lastname', 'Last Name', 40)
+                                    +row-text('address', 'Address', 40)
+                                    +row-text('suburb', 'Suburb', 20)
+                                    +row-select('state', 'State', ['[SELECT]','ACT','NSW','NT','QLD','SA','TAS','VIC','WA'])
+                                    +row-text('postcode', 'Postcode', 10, 4)
+                                    +row-text('phoneMobile', 'Mobile', 20)
+                                    +row-text('email', 'Email', 40, '', 'Please confirm your address is correct or your entry will not be accepted.')
+                                    +row-section-head('Vehicle Details', true)
+                                    +row-yes-no('reg', 'Is the vehicle registered?')
+                                    +row-text('numberPlate', 'Number Plate', 30, '', '', false)
+                                    +row-text('make', 'Make', 30)
+                                    +row-text('model', 'Model', 30)
+                                    +row-text('year', 'Year', 30)
+                                    +row-text('colour', 'Colour', 30)
+                                    +row-area('comments', 'Modifications', 'Please supply as much detail as possible')
+                                    +row-section-head('Fees and Passes', true)
+                                    tr
+                                        td(colspan='3', valign='top')
+                                            div(align='justify')
+                                                table(width='100%', border='0', cellspacing='0', cellpadding='0')
+                                                    tr(style='height: 52px')
+                                                        td(valign='top', style='border-bottom: none; padding-top:15px')
+                                                            input(type='radio', name='entryFee', id='entryFee', value='SJ Option 1 - Show-N-Sell Entry', onclick='performChecks(this);', checked) 
+                                                        td(valign='top', style='border-bottom: none; padding-top:15px')
+                                                            strong Option 1 - Show-N-Sell Entry - $35
+                                    tr
+                                        td(valign='top')
+                                            div(align='justify')
+                                                | Total Due $ :
+                                        td(colspan='2', valign='top')
+                                            div(align='justify')
+                                                input(type='text', name='totaldisplay', id='totaldisplay', size='8', onKeyPress='return handleEnter(this, event)', disabled)
+                                                |  includes 3% processing fee.
+                                                br/
+                                                input(type='hidden', name='total', id='total', value='')
+                                    +row-section-head('Acceptance Of Terms', true)
+                                    tr
+                                        td(colspan='3', valign='top', style='border-bottom: none;')
+                                            div(align='justify')
+                                                input(type='checkbox', name='acceptance', id='acceptance', value='1')
+                                                |  I/We understand that the Promoter reserves the right to refuse any entry without necessarily assigning a reason. I have read the #[a(href="/pdfs/2015 SJ SHOW Terms-Comditions.pdf", target="_blank") Show-N-Sell Terms &amp; Conditions (click to view)] issued for this event and agree to be bound by them and by any directions from Sport Compact Group officials.
+                                                p I/We hereby certify my/our acceptance of the Show-N-Shine Terms and Conditions of entry.
+                                                p
+                                                    strong NOTE:
+                                                    |  The organisers reserve the right to change/alter entry or Show-N-Sell procedure at any time as deemed necessary.
+                                                    br/
+                                                    br/
+                                                    | * Mandatory fields
+                                    tr
+                                        td(height='30', colspan='3', valign='top', style='border-bottom: none;')
+                                            div(align='justify')
+                                    tr
+                                        td(colspan='3')
+                                            div(align='justify')
+                                                input.submit(type='submit', value='Enter now & pay with Credit Card or PayPal')
+                                            h3(align='justify').
+                                                NOTE: After clicking the &quot;Enter Now&quot; button it may take up to 30 to 50 seconds for the PayPal payment screen to appear so please be patient.
+                            :php
+                                }

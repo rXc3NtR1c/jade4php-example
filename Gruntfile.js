@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: {
-      compile: ['htdocs/templates/**/*.phtml'],
+      compile: ['htdocs/*.php'],
     },
     jade4php: {
       compile: {
@@ -13,8 +13,8 @@ module.exports = function(grunt) {
         expand: true,
         cwd: 'jade',
         src: ['**/*.jade', '!_**/*.jade', '!layout/*.jade', '!mixins/*.jade', '!includes/*.jade'],
-        dest: 'htdocs/templates/',
-        ext: '.phtml'
+        dest: 'htdocs/',
+        ext: '.php'
       }
     }
   });

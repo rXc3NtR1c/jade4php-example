@@ -1,0 +1,80 @@
+//- Form Mixins
+
+//- Text field row
+mixin row-text(name, description, size, maxlength, msg, required)
+    tr
+        td(width='26%', valign='top')
+            div(align='justify')
+                | #{description} :
+        td(colspan='2', valign='top')
+            div(align='justify')
+                if maxlength
+                    input(type='text', name='#{name}', id='#{name}', size='#{size}', maxlength='#{maxlength}', onKeyPress='return handleEnter(this, event)')
+                else
+                    input(type='text', name='#{name}', id='#{name}', size='#{size}', onKeyPress='return handleEnter(this, event)')
+                if required != false
+                    |  *
+                else
+                    |  
+                if msg
+                    br/
+                    span.style4
+                        em= msg
+                        
+                        
+mixin row-area(name, description, msg)
+    tr
+        td(width='26%', valign='top')
+            div(align='justify')
+                | #{description} :
+        td(colspan='2', valign='top')
+            div(align='justify')
+                textarea(name='#{name}', id='#{name}', rows='3', cols='50')
+                |  *
+                if msg
+                    br/
+                    span.style4
+                        em= msg
+
+
+mixin row-select(name, description, items)
+    tr
+        td(valign='top')
+            div(align='justify')
+                | #{description} :
+        td(colspan='2', valign='top')
+            div(align='justify')
+                select(name='#{name}', id='#{name}')
+                    each item in items
+                        if item == '[SELECT]'
+                            option(value=0, selected) #{item}
+                        else
+                            option(value=item) #{item}
+                |  * 
+                span.style4
+                    em Note: Don't use scroll knob after selection.
+
+
+mixin row-yes-no(name, description)
+    tr
+        td(valign='top')
+            div(align='justify')
+                | #{description}
+        td(colspan='2', valign='top')
+            div(align='justify')
+                    input(type='radio', name='#{name}', value='yes') 
+                    | Yes
+                    input(type='radio', name='#{name}', value='no', checked)
+                    | No
+                    |  * 
+
+
+mixin row-section-head(description, spacer)
+    if spacer == true
+        tr
+            td(height='30', colspan='3', valign='middle', style='border-bottom: none;')
+                div(align='justify')
+    tr
+        td(height='30', colspan='3', valign='middle')
+            h3(align='justify')
+                strong #{description}

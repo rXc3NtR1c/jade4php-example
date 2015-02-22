@@ -1,7 +1,5 @@
 //- Mixins
-include ../mixins/navpanel.jade
-include ../mixins/navfoot.jade
-include ../mixins/social_media.jade
+include ../mixins/form.jade
 
 //- Config
 include ../includes/config.jade
@@ -9,60 +7,46 @@ include ../includes/config.jade
 //- Read config variables from page extension
 block config
 
-doctype html
+doctype transitional
 html(lang="en")
-  head
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]--> 
-    
-    meta(charset="utf-8")
-    title #{title}
-    meta(name="description" content="Jade4PHP is a an extension for Jade.js allowing you to create beautiful jade templates for PHP")
-    meta(name="author" content="Brian Etherington")
+    head
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]--> 
+        
+        meta(charset="utf-8")
+        title #{title}
 
-    //- Mobile Specific Metas
-    meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
+        //- Mobile Specific Metas
+        //- meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
 
-    //- Styles
-    include ../includes/styles.jade
+        //- Styles
+        include ../includes/styles.jade
+        
+        block local-styles
+        
+        block php-config
+            
+        //- Scripts
+        include ../includes/scripts.jade
+        
+        block local-scripts
 
-  body
-    header.row
-      div.grid_6
-        span
-          a.show-screen(href="https://github.com/BookArt/jade4php" target="_blank")
-            image(src="img/logo.png")
-        span
-          a.show-tablet(href="https://github.com/BookArt/jade4php" target="_blank")
-            image(src="img/logo.png")
-        span
-          a.show-mobile.float-left(href="https://github.com/BookArt/jade4php" target="_blank")
-            image(src="img/logo.png" width="200px")
-        span
-          a.show-mobile#navigation-btn(href="#") 
-            span.fa.fa-bars.fa-2x
-      div.grid_6.txt-right
-        h3.download
-          a(href="https://github.com/BookArt/jade4php-example/archive/master.zip") download&nbsp;
-            span.fa.fa-download
-        div.social
-          +social_media(sites)       
-      hr
-    section.row
-      br
-      h2.indent Getting started with jade4php
-      br
-    section.row
-      article.grid_3#navigation
-        +navpanel(menuPages, currentPage)
-      article.grid_9
-        block content
-    footer.row.txt-center
-      +navfoot(menuPages, currentPage)
-      | Copyright 2014 
-      a(href='http://www.jade4php.com') www.jade4php.com
-      | . All rights reserved.
-      br
-    //- Scripts
-    include ../includes/scripts.jade
+    body(style="background: #000 url(../../images/feature-bg-sydjam.jpg) top center no-repeat;" onload="changeForPasses()")
+        
+        //- The <div> tag below is needed for the Tooltip feature
+        div#overDiv(style="position:absolute; visibility:hidden; z-index:1000;")
+        :php
+            include('../../incs/php/sponsorwings.php');
+        table.main_table(width="100%" border="0" align="center" cellpadding="0" cellspacing="0")
+            tr
+                td.header(align="center" valign="top")
+                    :php
+                        include('../../incs/php/header.php')
+            tr
+                td.content-area(align="center")
+                    block content
+            tr
+                td.footer(align='center')
+                    :php
+                        include('../../incs/php/footer.php');
